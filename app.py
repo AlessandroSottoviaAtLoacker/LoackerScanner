@@ -17,6 +17,66 @@ from openpyxl.drawing.image import Image as ExcelImage
 from openpyxl.styles import Font, Border, Side
 
 
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing.image import img_to_array
+from tensorflow.keras.applications.imagenet_utils import preprocess_input
+
+
+import os
+from office365.runtime.auth.authentication_context import AuthenticationContext
+
+from office365.runtime.auth.client_credential import ClientCredential
+from office365.sharepoint.client_context import ClientContext
+
+from office365.runtime.auth.user_credential import UserCredential
+
+
+
+
+# def get_sharepoint_context_using_user():
+ 
+#     # Get sharepoint credentials
+#     sharepoint_url = 'https://devl0acker.sharepoint.com/sites/Test_Amazon_Q'
+
+#     # Initialize the client credentials
+#     user_credentials = UserCredential("ASottovia@devl0acker.onmicrosoft.com",  "Giorno05%")
+
+#     # create client context object
+#     ctx = ClientContext(sharepoint_url).with_credentials(user_credentials)
+
+#     return ctx
+
+
+# def create_sharepoint_directory(dir_name: str):
+    
+#     Creates a folder in the sharepoint directory.
+
+#     if dir_name:
+
+#         ctx = get_sharepoint_context_using_user()
+
+#         result = ctx.web.folders.add(f'Shared Documents/{dir_name}').execute_query()
+
+#         if result:
+#             # documents is titled as Shared Documents for relative URL in SP
+#             relative_url = f'Shared Documents/{dir_name}'
+#             return relative_url
+
+# create_sharepoint_directory('test directory')
+
+# def list_sharepoint_products():
+#     ctx = get_sharepoint_context_using_user()  # Call the function to get the context object
+#     # Assuming you have a valid context (ctx) established
+#     target_folder_url = "Shared Documents"
+#     folder = ctx.web.get_folder_by_server_relative_path(target_folder_url)
+#     print(folder.folders)
+#     for file in folder.files:
+#         print(file.name)
+
+# # Call the function to list SharePoint products
+# list_sharepoint_products()
+
+
 
 
 def create_excel_file(cluster_images, fat_coverage, choco_coverage,highlighted_image, original,coverage_percentages,suggested_area,  intensity):
@@ -175,12 +235,6 @@ def create_excel_file(cluster_images, fat_coverage, choco_coverage,highlighted_i
     return file_path
 
 
-
-
-
-
-
-
 def map_to_percentage(num):
     if num <= 2:
         return 0
@@ -192,9 +246,6 @@ def map_to_percentage(num):
         return 3
     else:
         return 4
-
-
-
 
 
 def get_cluster_data_by_name(json_file, name):
@@ -211,21 +262,6 @@ def get_cluster_data_by_name(json_file, name):
 
 
 def remove_background(image):
-    """
-     # Convert to grayscale
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-    # Threshold 160 and set the rest to 255 (remove the border)
-    ret, thresh = cv2.threshold(gray, 190, 255, cv2.THRESH_BINARY)
-
-    # Set all values equal to 255 to 0 (black)
-    image[thresh == 255] = 0
-
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
-    erosion = cv2.erode(image, kernel, iterations=1)
-    
-    return erosion  # Return the processed image
-    """
     image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
     lower_blue = np.array([155, 155, 150])
@@ -365,16 +401,6 @@ def rgb_analysis(image_input,key):
 
 
 
-
-
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing.image import img_to_array
-from tensorflow.keras.applications.imagenet_utils import preprocess_input
-
-# Load the model
-model_path = './classifier_loacker.h5'
-model = load_model(model_path)
-
 def main():
     st.title("Image Analysis App")
 
@@ -435,28 +461,24 @@ def main():
 
         image_np = np.array(image)
 
-
         st.image(image, caption="Uploaded Image", use_column_width=True)
-
 
         image2 = image2.resize((150, 150))  # Resize to match the input size of your model
         image_array = img_to_array(image2)
         image_array = np.expand_dims(image_array, axis=0)
 
-        # Perform prediction using the model
-        #prediction = model.predict(image_array)
-        #predicted_class_index = np.argmax(prediction, axis=1)[0]
-        #predicted_class_label = keys[predicted_class_index]
-        #st.subheader(f"Predicted Class: {predicted_class_label}")
-        #st.subheader(f"Predicted index: {predicted_class_index}")
-
-       
 
 
+        if 'clicked' not in st.session_state:
+                st.session_state.clicked = False
+        def click_button():
+            st.session_state.clicked = True
+                    
+        st.button("Perform Image Analysis", key="centered_button", on_click=click_button)
 
 
         # Confirm button
-        if st.button("Perform Image Analysis", key="centered_button"):
+        if  st.session_state.clicked:
             st.header("Analysis Results")
 
             # Perform image analysis
@@ -537,7 +559,21 @@ def main():
 
 
 
+            # with st.form("my_form"):
+            #     st.write("Inside the form")
+            #     slider_val = st.slider("Form slider")
+            #     checkbox_val = st.checkbox("Form checkbox")
 
+            #     # Every form must have a submit button.
+            #     submitted = st.form_submit_button("Submit")
+            #     if submitted:
+            #         sendToSharePoint()
+            #         st.write("Data Sent")
+            #         submitted = False
+
+
+
+          
 
 
 
