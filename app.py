@@ -407,46 +407,33 @@ def main():
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png"])
 
     keys = [
-        "Gardena_Tortina - Dark",
-        "Chocolate_bar - Dark",
-        "Chocolate_bar - Milk",
-        "Gardena_Choco:Coco - Milk",
-        "Patisserie_Orange - Dark",
-        "Napolitaner_Mini - Milk",
-        "Patisserie_Coconut - Milk",
-        "Gardena_fingers - Milk",
-        "Gardena_fingers - Dark",
-        "Rose - Dark",
-        "Rose - Milk",
-        "Gardena_Tortina_Original - Milk",
-        "Gardena_Tortina_Caramel - Milk",
+        "Tortina - BIS",
+        "Chocolate Bar - BIS",
+        "Chocolate Bar - DMS",
+        "Gardena - HMS",
+        "Patisserie - BIS",
+        "Chocolat Mini - DMS",
+        "Patisserie - HMS - kof",
+        "Gardena Fingers - HMS",
+        "Gardena Fingers - DMS",
+        "Rose - BIS",
+        "Rose - DMS",
+        "Tortina - DMS",
+        "Tortina - HMS",
         "Pattisserie_Hazelnut - Dark",
-        "Loacker_and_Cereals - Milk",
-        "Gardena_Hazelnut - Dark",
-        "Loackini - Milk",
-        "Patisserie_Noir - Dark",
-        "Patisserie_Cappuccino - Milk",
-        "Patisserie_Crème_Noisette - Milk",
-        "Gardena_Tortina_Peanut - Milk"
+        "Snack - HMS - DMS",
+        "Gardena - DMS",
+        "Loakini - DMS",
+        "Patisserie - BIS - hms",
+        "Patisserie - HMS - wes",
+        "Patisserie - HMS - dms",
+        "Gardena_Tortina_Peanut - Milk",
+        "Loakini_BIS",
+        "Chocolat Mini - BIS",
+        "Chocolat - DMS",
+        "Chocolat - BIS"
     ]
 
-    class_name_to_index = [
-            "Chocolate_bar_Dark" ,
-            "Chocolate_bar_Milk",
-            "Gardena_Dark",
-            "Gardena_Milk",
-            "Gardena_Tortina_Dark",
-            "Gardena_Tortina_Milk",
-            "Gardena_fingers_Dark",
-            "Gardena_fingers_Milk",
-            "Loacker_and_Cereals_Milk",
-            "Napolitaner_Mini_Milk",
-            "Patisserie_Cappuccino_Milk",
-            "Patisserie_Coconut_Milk",
-            "Patisserie_Crème_Noisette_Milk",
-            "Patisserie_Noir_Dark",
-            "Patisserie_Orange_Dark"
-        ]
 
 
     # Streamlit selectbox
