@@ -1,0 +1,16 @@
+name: demo_azure
+channels:
+ - conda-forge
+ - defaults
+dependencies:
+ - python
+ - pip
+ - pip:
+    - streamlit
+    - opencv-python
+    - Pillow
+    - numpy
+    - matplotlib
+    - pandas
+    - openpyxl
+    - tensorflow
