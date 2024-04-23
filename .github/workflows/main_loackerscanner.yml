@@ -66,4 +66,4 @@ jobs:
         with:
           app-name: 'LoackerScanner'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9A774CC489D143C3BF104ACC813C9D7B }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_499454B4C55E44AA946139132F5322F2 }}
